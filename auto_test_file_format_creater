@@ -1,0 +1,25 @@
+import os
+import shutil
+
+path="/home/bijit/Videos/qr_poi_numspoof"
+f=['/home/bijit/Videos/macro_poa_v_0_3 (1).h5','/home/bijit/Videos/loop_testing_script.py','/home/bijit/Videos/resize_lanczos4.py']
+
+# pth="/home/bijit/bijit/azcopy_linux_amd64_10.13.0/bijit_analysis/monthly_FNs_/qr_poi_micro/images/real"
+li=os.listdir(path+"/")
+print(len(li), end="\n")
+
+os.mkdir(path+"/images")
+# "fake" for FPs, change to "real" if FNs
+os.mkdir(path+"/images"+"/fake")
+os.mkdir(path+"/model")
+
+c=0
+for i in li:
+    if c==0:
+        shutil.copy(f[c],(path+"/model"))
+        c+=1
+    elif c<=2:
+        shutil.copy(f[c],path)
+        c+=1
+    shutil.move(os.path.join(path,i),path+"/images/fake")
+# print(len(li))
